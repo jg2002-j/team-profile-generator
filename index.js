@@ -46,10 +46,12 @@ const endAnswers = () => {
 	turnInternsintoObjects();
 
 	// TODO: Call the `render` function (provided for you) and pass in an array containing all employee objects;
-	render(employeeObjects);
-
-	// TODO: Create an HTML file using the HTML returned from the `render` function. 
+	const htmlData = render(employeeObjects)
+	// TODO: Create an HTML file using the HTML returned from the `render` function.
 	// TODO: Write it to a file named `team.html` in the `output` folder. You can use the provided variable `outputPath` to target this location.
+	fs.writeFile('team.html', htmlData, (error) =>
+		error ? console.error(err) : console.log(`Written to team.html and saved in ${outputPath}`)
+ 	);
 };
 
 const mainMenu = () => {
