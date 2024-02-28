@@ -49,8 +49,8 @@ const endAnswers = () => {
 	const htmlData = render(employeeObjects)
 	// TODO: Create an HTML file using the HTML returned from the `render` function.
 	// TODO: Write it to a file named `team.html` in the `output` folder. You can use the provided variable `outputPath` to target this location.
-	fs.writeFile('team.html', htmlData, (error) =>
-		error ? console.error(err) : console.log(`Written to team.html and saved in ${outputPath}`)
+	fs.writeFile(outputPath, htmlData, (error) =>
+		error ? console.error(err) : console.log(`Success: answers written to ${outputPath}`)
  	);
 };
 
