@@ -131,29 +131,27 @@ const internAnswers = [];
 const employeeAnswers = [];
 
 const mainMenu = () => {
-	inquirer.prompt(managerQuestions).then((answers) => {
-		managerAnswers.push(answers);
-		inquirer.prompt(addTeamMenuQuestions).then((answers) => {
-			console.log("\n");
-			console.log(answers.optionsMenu);
-			if (answers.optionsMenu == "Add an engineer.") {
-				//  TODO: When a user selects the **engineer** option then a user is prompted to enter the following and then the user is taken back to the menu:
-				inquirer.prompt(engineerQuestions).then((answers) => {engineerAnswers.push(answers);})
-				mainMenu();
-			} else if (answers.optionsMenu == "Add an intern.") {
-				//  TODO: When a user selects the intern option then a user is prompted to enter the following and then the user is taken back to the menu:
-				inquirer.prompt(internQuestions).then((answers) => {internAnswers.push(answers)})
-				mainMenu();
-			} else if (answers.optionsMenu == "Finish building the team.") {
-				inquirer.prompt(employeeQuestions).then((answers) => {employeeAnswers.push(answers)})
-				mainMenu();
-			} else if (answers.optionsMenu == "Exit the application."){};
-		});	
-	});
-}
+	inquirer.prompt(addTeamMenuQuestions).then((answers) => {
+		console.log("\n");
+		console.log(answers.optionsMenu);
+		if (answers.optionsMenu == "Add an engineer.") {
+			//  TODO: When a user selects the **engineer** option then a user is prompted to enter the following and then the user is taken back to the menu:
+			inquirer.prompt(engineerQuestions).then((answers) => {engineerAnswers.push(answers);})
+			mainMenu();
+		} else if (answers.optionsMenu == "Add an intern.") {
+			//  TODO: When a user selects the intern option then a user is prompted to enter the following and then the user is taken back to the menu:
+			inquirer.prompt(internQuestions).then((answers) => {internAnswers.push(answers)})
+			mainMenu();
+		} else if (answers.optionsMenu == "Finish building the team.") {
+			inquirer.prompt(employeeQuestions).then((answers) => {employeeAnswers.push(answers)})
+			mainMenu();
+		} else if (answers.optionsMenu == "Exit the application."){};
+	});	
+};
 
+inquirer.prompt(managerQuestions).then((answers) => {
+	managerAnswers.push(answers);
+	//  TODO: When a user decides to finish building their team then they exit the application, and the HTML is generated.
+	mainMenu();
+});
 
-
-
-
-//  TODO: When a user decides to finish building their team then they exit the application, and the HTML is generated.
