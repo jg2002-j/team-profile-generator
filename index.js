@@ -46,7 +46,7 @@ const addTeamMenuQuestions = [
 		type: "list",
 		name: "optionsMenu",
 		message: "Please select an option:",
-		choices: ["Add an engineer.", "Add an intern.", "Finish building the team."],
+		choices: ["Add an engineer.", "Add an intern.", "Finish building the team.", "Exit the application."],
 	},
 ];
 
@@ -125,35 +125,32 @@ const employeeQuestions = [
 	},
 ];
 
-
 const managerAnswers = [];
 const engineerAnswers = [];
 const internAnswers = [];
 const employeeAnswers = [];
 
-
-inquirer.prompt(managerQuestions).then((answers) => {
-	managerAnswers.push(answers);
-	inquirer.prompt(addTeamMenuQuestions).then((answers) => {
-		console.log("\n");
-		console.log(answers.optionsMenu);
-		if (answers.optionsMenu == "Add an engineer.") {
-			//  TODO: When a user selects the **engineer** option then a user is prompted to enter the following and then the user is taken back to the menu:
-			inquirer.prompt(engineerQuestions).then((answers) => {
-				engineerAnswers.push(answers);
-			})
-		} else if (answers.optionsMenu == "Add an intern.") {
-			//  TODO: When a user selects the intern option then a user is prompted to enter the following and then the user is taken back to the menu:
-			inquirer.prompt(internQuestions).then((answers) => {
-				internAnswers.push(answers)
-			})
-		} else if (answers.optionsMenu == "Finish building the team.") {
-			inquirer.prompt(employeeQuestions).then((answers) => {
-				employeeAnswers.push(answers)
-			})
-		};
-	});	
-});
+const mainMenu = () => {
+	inquirer.prompt(managerQuestions).then((answers) => {
+		managerAnswers.push(answers);
+		inquirer.prompt(addTeamMenuQuestions).then((answers) => {
+			console.log("\n");
+			console.log(answers.optionsMenu);
+			if (answers.optionsMenu == "Add an engineer.") {
+				//  TODO: When a user selects the **engineer** option then a user is prompted to enter the following and then the user is taken back to the menu:
+				inquirer.prompt(engineerQuestions).then((answers) => {engineerAnswers.push(answers);})
+				mainMenu();
+			} else if (answers.optionsMenu == "Add an intern.") {
+				//  TODO: When a user selects the intern option then a user is prompted to enter the following and then the user is taken back to the menu:
+				inquirer.prompt(internQuestions).then((answers) => {internAnswers.push(answers)})
+				mainMenu();
+			} else if (answers.optionsMenu == "Finish building the team.") {
+				inquirer.prompt(employeeQuestions).then((answers) => {employeeAnswers.push(answers)})
+				mainMenu();
+			} else if (answers.optionsMenu == "Exit the application."){};
+		});	
+	});
+}
 
 
 
