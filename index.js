@@ -18,13 +18,38 @@ const managerAnswers = [];
 const engineerAnswers = [];
 const internAnswers = [];
 
+// TODO: turn all responses into objects in an array using the classes
+
+const employeeObjects = [];
+
+const turnManagersintoObjects = () => {
+	managerAnswers.forEach(response => {
+		employeeObjects.push(new Manager (response.managerName, response.managerID, response.managerEmail, response.managerOfficeNumber));
+	});
+}
+
+const turnEngineersintoObjects = () => {
+	engineerAnswers.forEach(response => {
+		employeeObjects.push(new Engineer (response.engineerName, response.engineerID, response.engineerEmail, response.engineerGithub));
+	});
+}
+
+const turnInternsintoObjects = () => {
+	internAnswers.forEach(response => {
+		employeeObjects.push(new Intern (response.internName, response.internID, response.internEmail, response.internSchool));
+	});
+}
+
 const endAnswers = () => {
-	console.log("Manager Answers:");
-	console.log(managerAnswers);
-	console.log("Engineer Answers:");
-	console.log(engineerAnswers);
-	console.log("Intern Answers:");
-	console.log(internAnswers);
+	turnManagersintoObjects();
+	turnEngineersintoObjects();
+	turnInternsintoObjects();
+
+	// TODO: Call the `render` function (provided for you) and pass in an array containing all employee objects;
+	render(employeeObjects);
+
+	// TODO: Create an HTML file using the HTML returned from the `render` function. 
+	// TODO: Write it to a file named `team.html` in the `output` folder. You can use the provided variable `outputPath` to target this location.
 };
 
 const mainMenu = () => {
@@ -32,7 +57,7 @@ const mainMenu = () => {
 		console.log("\n");
 		console.log(`==== ${answers.optionsMenu} ====`);
 		if (answers.optionsMenu == "Add an engineer.") {
-			//  TODO: When a user selects the **engineer** option then a user is prompted to enter the following and then the user is taken back to the menu:
+			//  TODO: When a user selects the engineer option then a user is prompted to enter the following and then the user is taken back to the menu:
 			inquirer.prompt(inquirerquestions.engineerQuestions).then((answers) => {
 				engineerAnswers.push(answers);
 				mainMenu();
